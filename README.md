@@ -4,14 +4,16 @@ This project is an ASP.NET web service that serves a customized calendar with sp
 ## Classes
 
 ### <a name="BaseYearlyRecurringEvent"></a> BaseYearlyRecurringEvent
-All yearly recurring events inherit from the same base type, *abstract*.
+*abstract*, All yearly recurring events inherit from the same base type.
 
 | Member | Type | Description |
 | --- | --- | --- |
 | Id | [Guid] | A unique identifier |
 | Name | [string] | The event name |
-| Type | [YearlyRecurringEventType](#YearlyRecurringEventType) | The type of recurring event |
-| GetDate([int] year) | [DateTime] | Return the date this event occurs for the specified year |
+| Description | [string] | A description of this event |
+| Tags | [ISet]<[string]> | A set of string tags associated with this event |
+| Type | [YearlyRecurringEventType](#YearlyRecurringEventType) | *abstract*, The type of recurring event |
+| GetDate([int] year) | [DateTime] | *abstract*, Return the date this event occurs for the specified year |
 
 ### <a name="EasterBasedYearlyRecurringEvent"></a> EasterBasedYearlyRecurringEvent
 > Inherits [BaseYearlyRecurringEvent](#BaseYearlyRecurringEvent)
@@ -41,7 +43,7 @@ This recurring event is set on a fixed date (e.g., New Year's, July 4) but shift
 | --- | --- | --- |
 | Month | [Month](#Month) | The month |
 | Day | [int] The day of the month |
-| ObservanceRules | ICollection<[ObservanceRule](#ObservanceRule)> | The observance rules |
+| ObservanceRules | [ICollection]<[ObservanceRule](#ObservanceRule)> | The observance rules |
 
 ### <a name="MonthWeekBasedYearlyRecurringEvent"></a> MonthWeekBasedYearlyRecurringEvent
 > Inherits [BaseYearlyRecurringEvent](#BaseYearlyRecurringEvent)
@@ -52,7 +54,7 @@ This recurring event occurs on the specified [DayOfWeek](#DayOfWeek) of the spec
 | --- | --- | --- |
 | Month | [Month](#Month) | The month |
 | Week | [int] | Between 5 and -5 inclusive, the week of the month |
-| DayOfWeek | [DayOfWeek](#DayOfWeek) | The day of the week the event occurs | 
+| DayOfWeek | [DayOfWeek](#DayOfWeek) | The day of the week the event occurs |
 
 ### <a name="ObservanceRule"></a> ObservanceRule
 Observance rules define what action [FixedDateBasedYearlyRecurringEvent](#FixedDateBasedYearlyRecurringEvent) takes when determining its occurrences.
@@ -103,3 +105,5 @@ Observance rules define what action [FixedDateBasedYearlyRecurringEvent](#FixedD
 [int]: https://docs.microsoft.com/en-us/dotnet/api/system.int32?view=netcore-2.0
 [DateTime]: https://docs.microsoft.com/en-us/dotnet/api/system.datetime?view=netcore-2.0
 [object]: https://docs.microsoft.com/en-us/dotnet/api/system.object?view=netcore-2.0
+[ICollection]: https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.icollection-1?view=netcore-2.0
+[ISet]: https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.iset-1?view=netcore-2.0
