@@ -1,0 +1,116 @@
+---
+- id: 9e904ed3-b5de-458b-a675-68273e8edb6e
+  name: New Year's Day
+  type: FixedDateBasedYearlyRecurringEvent
+  month: January
+  day: 1
+  observance_rules: *nearest_weekday
+  - day_of_week: Saturday
+    action: Shift
+    offset: -1
+  - day_of_week: Sunday
+    action: Shift
+    offset: 1
+  examples:
+    2011: '2010-12-31'
+    2012: '2012-01-02'
+    2013: '2013-01-01'
+    2014: '2014-01-01'
+    2015: '2015-01-01'
+    2016: '2016-01-01'
+    2017: '2017-01-02'
+    2018: '2018-01-01'
+    2019: '2019-01-01'
+    2020: '2020-01-01'
+- id: 350c1e22-597d-47c2-81a5-6f4ec66dcb99
+  name: Lundi Gras
+  type: EasterBasedYearlyRecurringEvent
+  offset: -48
+- id: 665c91cb-45b9-4b67-90e3-5b4622c00672
+  name: Mardi Gras
+  type: EasterBasedYearlyRecurringEvent
+  offset: -47
+  examples:
+    2011: '2011-03-08'
+    2012: '2012-02-21'
+    2013: '2013-02-12'
+    2014: '2014-03-04'
+    2015: '2015-02-17'
+    2016: '2016-02-09'
+    2017: '2017-02-28'
+    2018: '2018-02-13'
+    2019: '2019-03-05'
+    2020: '2020-02-20'
+- id: ec6bb921-562b-4dd7-ba67-7866c1b11437
+  name: Good Friday
+  type: EasterBasedYearlyRecurringEvent
+  offset: -2
+- id: d04e6cb5-a0da-42e0-84e7-b8d9c6bc99a0
+  name: Memorial Day
+  type: MonthWeekBasedYearlyRecurringEvent
+  month: May
+  week: -1
+  day_of_week: Monday
+  examples:
+    2011: '2011-05-30'
+    2012: '2012-05-28'
+    2013: '2013-05-27'
+    2014: '2014-05-26'
+    2015: '2015-05-25'
+    2016: '2016-05-30'
+    2017: '2017-05-29'
+    2018: '2018-05-28'
+    2019: '2019-05-27'
+    2020: '2020-05-25'
+- id: f9d86cc2-f3c9-43b4-8e68-87524861bb5a
+  name: Independance Day
+  type: FixedDateBasedYearlyRecurringEvent
+  month: July
+  day: 4
+  observance_rules: &nearest_weekday
+- id: d9599f18-0a2d-4b33-a5b9-35e4dc2146a4
+  name: Labor Day
+  type: MonthWeekBasedYearlyRecurringEvent
+  month: September
+  week: 1
+  day_of_week: Monday
+  examples:
+    2011: '2011-09-05'
+    2012: '2012-09-03'
+    2013: '2013-09-02'
+    2014: '2014-09-01'
+    2015: '2015-09-07'
+    2016: '2016-09-05'
+    2017: '2017-09-04'
+    2018: '2018-09-03'
+    2019: '2019-09-02'
+    2020: '2020-09-07'
+- id: 095050e4-5f44-4336-a8ef-d888bfdcb27a
+  name: Thanksgiving Day
+  type: MonthWeekBasedYearlyRecurringEvent
+  month: November
+  week: 4
+  day_of_week: Thursday
+- id: 56d6106e-1f86-43ef-84b5-d660af1488c3
+  name: Acadian Day (Black Friday)
+  type: ReferenceBasedYearlyRecurringEvent
+  event_id: 095050e4-5f44-4336-a8ef-d888bfdcb27a
+  offset: 1
+- id: c81fece7-3b97-4aad-bbe7-ff703876e130
+  name: Christmas Eve
+  type: FixedDateBasedYearlyRecurringEvent
+  month: December
+  day: 24
+  observance_rules: &nearest_weekday
+- id: d7b33a72-0baf-4e7a-8da3-409328ea3062
+  name: Christmas Day
+  type: FixedDateBasedYearlyRecurringEvent
+  month: December
+  day: 25
+  observance_rules: &nearest_weekday
+- id: da54fc9b-7325-4c4b-8c58-7786d5e182bb
+  name: New Year's Eve
+  type: FixedDateBasedYearlyRecurringEvent
+  month: December
+  day: 31
+  observance_rules: &nearest_weekday

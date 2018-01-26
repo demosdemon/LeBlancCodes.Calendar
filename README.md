@@ -9,6 +9,7 @@ All yearly recurring events inherit from the same base type, *abstract*.
 | Member | Type | Description |
 | --- | --- | --- |
 | Id | [Guid] | A unique identifier |
+| Name | [string] | The event name |
 | Type | [YearlyRecurringEventType](#YearlyRecurringEventType) | The type of recurring event |
 | GetDate([int] year) | [DateTime] | Return the date this event occurs for the specified year |
 
