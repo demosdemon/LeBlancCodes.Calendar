@@ -1,7 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <NetStandardVersion>netstandard2.0</NetStandardVersion>
   </PropertyGroup>
 
+  <Choose>
+    <When Condition="$([MSBuild]::IsOSPlatform(Windows))">
+      <PropertyGroup>
+        <TargetFrameworks>$(NetStandardVersion);net471</TargetFrameworks>
+      </PropertyGroup>
+    </When>
+    <When Condition="$([MSBuild]::IsOSUnixLike)">
+      <PropertyGroup>
+        <TargetFrameworks>$(NetStandardVersion);netcoreapp2.0</TargetFrameworks>
+      </PropertyGroup>
+    </When>
+  </Choose>
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IsPackable>true</IsPackable>
+    <IncludeSource>true</IncludeSource>
+    <IncludeSymbols>true</IncludeSymbols>
+    <WarningsNotAsErrors>$(WarningsNotAsErrors);1591</WarningsNotAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.0.0-rc0002" />
+    <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
+  </ItemGroup>
 </Project>

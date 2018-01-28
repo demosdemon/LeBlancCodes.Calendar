@@ -1,17 +1,30 @@
 <Project>
   <PropertyGroup>
-    <VersionPrefix>0.1.0</VersionPrefix>
-    <VersionSuffix>alpha</VersionSuffix>
-    <PackageVersion Condition="'$(APPVEYOR_REPO_TAG)' == 'true' AND '$(VersionSuffix)' != ''">$(VersionPrefix)-$(VersionSuffix)</PackageVersion>
-    <PackageVersion Condition="'$(APPVEYOR_REPO_TAG)' == 'true' AND '$(VersionSuffix)' == 'rtm'">$(VersionPrefix)</PackageVersion>
-
     <BuildNumber Condition=" '$(BuildNumber)' == '' ">$(APPVEYOR_BUILD_NUMBER)</BuildNumber>
-    <BuildNumber Condition=" '$(BuildNumber)' == '' ">0</BuildNumber>
-    <FileVersion>$(VersionPrefix).$(BuildNumber)</FileVersion>
-    <VersionSuffix Condition=" '$(VersionSuffix)' != '' ">$(VersionSuffix).$(BuildNumber)</VersionSuffix>
   </PropertyGroup>
 
-  <ItemGroup>
+  <Choose>
+    <When Condition="'APPVEYOR_REPO_TAG' == 'true' And '$(APPVEYOR_REPO_BRANCH)' == 'master'">
+      <PropertyGroup>
+        <VersionPrefix>$(APPVEYOR_REPO_TAG_NAME)</VersionPrefix>
+        <VersionSuffix></VersionSuffix>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <VersionPrefix>0.1.0</VersionPrefix>
+        <VersionSuffix>dev</VersionSuffix>
+        <VersionSuffix Condition="'$(APPVEYOR_REPO_BRANCH)' == 'master' And '$(APPVEYOR_PULL_REQUEST_NUMBER)' == ''">beta</VersionSuffix>
+        <VersionSuffix Condition="'$(APPVEYOR_PULL_REQUEST_NUMBER)' != ''">pr$(APPVEYOR_PULL_REQUEST_NUMBER)</VersionSuffix>
+        <VersionSuffix Condition="'$(APPVEYOR_REPO_BRANCH)' != ''">$(APPVEYOR_REPO_BRANCH)</VersionSuffix>
+        <FileVersion Condition="'$(BuildNumber)' != ''">$(VersionPrefix).$(BuildNumber)</FileVersion>
+        <FileVersion Condition="'$(BuildNumber)' == ''">$(VersionPrefix)</FileVersion>
+        <VersionSuffix Condition=" '$(VersionSuffix)' != '' And '$(BuildNumber)' != '' ">$(VersionSuffix).$(BuildNumber)</VersionSuffix>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
+  <ItemGroup Condition="'$(BuildNumber)' != ''">
     <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
       <_Parameter1>BuildNumber</_Parameter1>
       <_Parameter2>$(BuildNumber)</_Parameter2>
