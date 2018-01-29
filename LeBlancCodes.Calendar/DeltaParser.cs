@@ -22,7 +22,7 @@ namespace LeBlancCodes.Calendar
     /// <summary>
     ///     Class DeltaParser.
     /// </summary>
-    public class DeltaParser
+    public static class DeltaParser
     {
         /// <summary>
         ///     The delta

@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E68E5081-2
 		test\feed.yaml = test\feed.yaml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeBlancCodes.Calendar.Tests", "LeBlancCodes.Calendar.Tests\LeBlancCodes.Calendar.Tests.csproj", "{EEDF3F17-385A-4136-8DEC-B8DBE5D172CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{712BC98C-3E7D-4236-A1D6-26AD4BD9F27B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{712BC98C-3E7D-4236-A1D6-26AD4BD9F27B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{712BC98C-3E7D-4236-A1D6-26AD4BD9F27B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEDF3F17-385A-4136-8DEC-B8DBE5D172CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEDF3F17-385A-4136-8DEC-B8DBE5D172CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEDF3F17-385A-4136-8DEC-B8DBE5D172CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEDF3F17-385A-4136-8DEC-B8DBE5D172CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

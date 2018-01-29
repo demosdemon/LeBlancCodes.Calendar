@@ -4,7 +4,7 @@
 // Created          : 01-27-2018
 //
 // Last Modified By : Brandon LeBlanc
-// Last Modified On : 01-27-2018
+// Last Modified On : 01-28-2018
 // ***********************************************************************
 // <copyright file="DateTimeExtensions.cs" company="Brandon LeBlanc">
 //     Copyright © 2018 LeBlanc Codes, LLC
@@ -14,7 +14,6 @@
 
 using System;
 using FluentAssertions;
-using LeBlancCodes.Calendar.Interfaces;
 
 namespace LeBlancCodes.Calendar
 {
@@ -31,12 +30,18 @@ namespace LeBlancCodes.Calendar
         public static bool IsWeekday(this DateTimeOffset dto) => dto.DayOfWeek.IsWeekday();
 
         /// <summary>
-        /// Determines whether the specified <see cref="DayOfWeek"/> is a weekday.
+        ///     Determines whether the specified <see cref="DayOfWeek" /> is a weekday.
         /// </summary>
         /// <param name="dow">The dow.</param>
         /// <returns><c>true</c> if the specified dow is weekday; otherwise, <c>false</c>.</returns>
         public static bool IsWeekday(this DayOfWeek dow) => DayOfWeek.Sunday < dow && dow < DayOfWeek.Saturday;
 
+        /// <summary>
+        ///     Sets the time zone.
+        /// </summary>
+        /// <param name="dto">The dto.</param>
+        /// <param name="timeZone">The time zone.</param>
+        /// <returns>DateTimeOffset.</returns>
         public static DateTimeOffset SetTimeZone(this DateTimeOffset dto, TimeZoneInfo timeZone)
         {
             timeZone.Should().NotBeNull();

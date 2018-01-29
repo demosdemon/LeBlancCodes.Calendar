@@ -1,21 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <NetStandardVersion>netstandard2.0</NetStandardVersion>
-  </PropertyGroup>
-
-  <Choose>
-    <When Condition="$([MSBuild]::IsOSPlatform(Windows))">
-      <PropertyGroup>
-        <TargetFrameworks>$(NetStandardVersion);net471</TargetFrameworks>
-      </PropertyGroup>
-    </When>
-    <When Condition="$([MSBuild]::IsOSUnixLike)">
-      <PropertyGroup>
-        <TargetFrameworks>$(NetStandardVersion);netcoreapp2.0</TargetFrameworks>
-      </PropertyGroup>
-    </When>
-  </Choose>
-  <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable>true</IsPackable>
     <IncludeSource>true</IncludeSource>

@@ -1,6 +1,10 @@
 <Project>
-
   <Import Project="version.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform(Windows))">$(TargetFrameworks);net471</TargetFrameworks>
+  </PropertyGroup>
 
   <PropertyGroup>
     <Authors>Brandon LeBlanc</Authors>
@@ -22,4 +26,9 @@
     <BaseOutputPath>$(MSBuildThisFileDirectory).build\bin\$(MSBuildProjectName)\</BaseOutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>LeBlancCodes.Calendar.Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
 </Project>

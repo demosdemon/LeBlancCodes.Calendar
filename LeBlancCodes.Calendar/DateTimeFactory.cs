@@ -36,12 +36,11 @@ namespace LeBlancCodes.Calendar
         /// <returns>DateTimeOffset.</returns>
         public DateTimeOffset CreateDateTimeOffset(int year, int month = 1, int date = 1, int hour = 0, int minute = 0, int second = 0, int millisecond = 0)
         {
-            millisecond = SetValue(millisecond, 0, 1000, ref second);
-            second = SetValue(second, 0, 60, ref minute);
-            minute = SetValue(minute, 0, 60, ref hour);
-            hour = SetValue(hour, 0, 24, ref date);
-            date = SetValue(date, 1, () => DateTime.DaysInMonth(year, month), ref month);
-            month = SetValue(month, 1, 12, ref year);
+            millisecond = SetValue(millisecond, 0, 1000, second, s => second = s);
+            second = SetValue(second, 0, 60, minute, m => minute = m);
+            minute = SetValue(minute, 0, 60, hour, h => hour = h);
+            hour = SetValue(hour, 0, 24, date, d => date = d);
+            date = SetValue(date, 1, () => DateTime.DaysInMonth(year, month), month, m => month = SetValue(m, 1, 12, year, y => year = y));
 
             var dt = new DateTime(year, month, date, hour, minute, second, millisecond, DateTimeKind.Unspecified);
             var utc = TimeZone.GetUtcOffset(dt);
@@ -55,19 +54,20 @@ namespace LeBlancCodes.Calendar
         public TimeZoneInfo TimeZone { get; set; } = TimeZoneInfo.Local;
 
         /// <summary>
-        ///     Sets the value.
+        /// Sets the value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="minValue">The minimum value.</param>
         /// <param name="maxValue">The maximum value.</param>
         /// <param name="parentValue">The parent value.</param>
+        /// <param name="setParent">The set parent.</param>
         /// <returns>System.Int32.</returns>
-        private static int SetValue(int value, int minValue, [InstantHandle] Func<int> maxValue, ref int parentValue)
+        private static int SetValue(int value, int minValue, [InstantHandle] Func<int> maxValue, int parentValue, Func<int, int> setParent)
         {
             var direction = value < minValue ? -1 : 1;
-            while (value < minValue && maxValue() + minValue <= value)
+            while (value < minValue || maxValue() + minValue <= value)
             {
-                parentValue += direction;
+                parentValue = setParent(parentValue + direction);
                 value -= maxValue() * direction;
             }
 
@@ -75,13 +75,15 @@ namespace LeBlancCodes.Calendar
         }
 
         /// <summary>
-        ///     Sets the value.
+        /// Sets the value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="minValue">The minimum value.</param>
         /// <param name="maxValue">The maximum value.</param>
         /// <param name="parentValue">The parent value.</param>
+        /// <param name="setParent">The set parent.</param>
         /// <returns>System.Int32.</returns>
-        private static int SetValue(int value, int minValue, int maxValue, ref int parentValue) => SetValue(value, minValue, () => maxValue, ref parentValue);
+        private static int SetValue(int value, int minValue, int maxValue, int parentValue, Func<int, int> setParent) =>
+            SetValue(value, minValue, () => maxValue, parentValue, setParent);
     }
 }

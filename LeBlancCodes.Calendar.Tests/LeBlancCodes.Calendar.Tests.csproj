@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="NUnit" Version="3.9.0" />
+    <ProjectReference Include="..\LeBlancCodes.Calendar\LeBlancCodes.Calendar.csproj"></ProjectReference>
+  </ItemGroup>
+</Project>
