@@ -113,12 +113,6 @@ namespace LeBlancCodes.Calendar.Events
         public IReadOnlyCollection<DateTimeOffset> Examples { get; protected set; }
 
         /// <summary>
-        /// Gets the earliest occurrence month.
-        /// </summary>
-        /// <value>The earliest occurrence month.</value>
-        public abstract Month EarliestOccurrenceMonth { get; }
-
-        /// <summary>
         ///     Gets the date.
         /// </summary>
         /// <param name="factory">The factory.</param>
@@ -133,6 +127,12 @@ namespace LeBlancCodes.Calendar.Events
             _cache[year] = result;
             return result;
         }
+
+        /// <summary>
+        ///     Gets the earliest occurrence month.
+        /// </summary>
+        /// <value>The earliest occurrence month.</value>
+        public abstract Month EarliestOccurrenceMonth { get; }
 
         /// <summary>
         ///     Returns a hash code for this instance.

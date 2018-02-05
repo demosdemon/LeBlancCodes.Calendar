@@ -141,7 +141,7 @@ namespace LeBlancCodes.Calendar
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         /// <exception cref="System.NotImplementedException"></exception>
         /// <exception cref="NotImplementedException"></exception>
-        public IEnumerator<IYearlyRecurringEvent> GetEnumerator() => new EventEnumerator(_eventsByMonth, (int)Month.January, Direction.Forward);
+        public IEnumerator<IYearlyRecurringEvent> GetEnumerator() => new EventEnumerator(_eventsByMonth, (int) Month.January, Direction.Forward);
 
         /// <summary>
         ///     Gets the previous event.

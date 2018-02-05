@@ -49,6 +49,17 @@ namespace LeBlancCodes.Calendar.Tests
         }
 
         [Test]
+        public void TestSet()
+        {
+            var factory = new DateTimeFactory();
+            var dto = factory.CreateDateTimeOffset(2017, 04, 12, 8, 9, 10, 130);
+
+            Assert.AreEqual(dto.Set(12), factory.CreateDateTimeOffset(2017, 04, 12, 12));
+            Assert.AreEqual(dto.Set(minute: 12), factory.CreateDateTimeOffset(2017, 04, 12, 0, 12));
+            Assert.AreEqual(dto.Set(second: 12), factory.CreateDateTimeOffset(2017, 04, 12, 0, 0, 12));
+        }
+
+        [Test]
         public void TestSetTimeZone()
         {
             var factory = new DateTimeFactory();
@@ -58,17 +69,6 @@ namespace LeBlancCodes.Calendar.Tests
             var newDto = dto.SetTimeZone(timeZone);
             Assert.AreEqual(dto.DateTime, newDto.DateTime);
             Assert.AreEqual(dto - newDto, offset);
-        }
-
-        [Test]
-        public void TestSet()
-        {
-            var factory = new DateTimeFactory();
-            var dto = factory.CreateDateTimeOffset(2017, 04, 12, 8, 9, 10, 130);
-
-            Assert.AreEqual(dto.Set(hour: 12), factory.CreateDateTimeOffset(2017, 04, 12, 12));
-            Assert.AreEqual(dto.Set(minute: 12), factory.CreateDateTimeOffset(2017, 04, 12, 0, 12));
-            Assert.AreEqual(dto.Set(second: 12), factory.CreateDateTimeOffset(2017, 04, 12, 0, 0, 12));
         }
     }
 }

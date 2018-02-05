@@ -53,17 +53,17 @@ namespace LeBlancCodes.Calendar.Interfaces
     public interface IYearlyRecurringEvent : IRecurringEvent
     {
         /// <summary>
+        ///     Gets the earliest occurrence month.
+        /// </summary>
+        /// <value>The earliest occurrence month.</value>
+        Month EarliestOccurrenceMonth { get; }
+
+        /// <summary>
         ///     Gets the occurrence for the specified year.
         /// </summary>
         /// <param name="factory">The factory.</param>
         /// <param name="year">The year.</param>
         /// <returns>DateTimeOffset.</returns>
         DateTimeOffset GetOccurrenceForYear(IDateTimeFactory factory, int year);
-
-        /// <summary>
-        /// Gets the earliest occurrence month.
-        /// </summary>
-        /// <value>The earliest occurrence month.</value>
-        Month EarliestOccurrenceMonth { get; }
     }
 }

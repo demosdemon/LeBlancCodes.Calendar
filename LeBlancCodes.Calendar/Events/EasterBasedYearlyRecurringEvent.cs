@@ -22,13 +22,13 @@ namespace LeBlancCodes.Calendar.Events
     /// </summary>
     public sealed class EasterBasedYearlyRecurringEvent : BaseYearlyRecurringEvent<EasterBasedYearlyRecurringEvent>
     {
-        private static DateTimeOffset EarliestEaster => DateTimeFactory.Instance.CreateDateTimeThisYear(Month.March, 22);
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="EasterBasedYearlyRecurringEvent" /> class.
         /// </summary>
         /// <param name="offset">The offset.</param>
         public EasterBasedYearlyRecurringEvent(int offset) => Offset = offset;
+
+        private static DateTimeOffset EarliestEaster => DateTimeFactory.Instance.CreateDateTimeThisYear(Month.March, 22);
 
         /// <summary>
         ///     Gets the earliest occurrence month.

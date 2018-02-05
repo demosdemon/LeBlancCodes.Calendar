@@ -1,5 +1,4 @@
 using System;
-using NUnit;
 using NUnit.Framework;
 
 namespace LeBlancCodes.Calendar.Tests
@@ -12,12 +11,6 @@ namespace LeBlancCodes.Calendar.Tests
         private static TimeZoneInfo TimeZone => TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
 
         [Test]
-        public void TestInitialization()
-        {
-            Assert.That(() => new DateTimeFactory(), Is.Not.Null);
-        }
-
-        [Test]
         public void TestCreateOverflow()
         {
             var factory = new DateTimeFactory {TimeZone = TimeZone};
@@ -27,6 +20,12 @@ namespace LeBlancCodes.Calendar.Tests
             Assert.AreEqual("2012-12-31T23:59:30-06:00", result.ToString(Format));
             result = factory.CreateDateTimeOffset(2018, 1, 24, 36, 80, -1000000);
             Assert.AreEqual("2018-01-13T23:33:20-06:00", result.ToString(Format));
+        }
+
+        [Test]
+        public void TestInitialization()
+        {
+            Assert.That(() => new DateTimeFactory(), Is.Not.Null);
         }
     }
 }
