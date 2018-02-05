@@ -27,6 +27,23 @@ namespace LeBlancCodes.Calendar.Interfaces
         /// <value>The time zone.</value>
         TimeZoneInfo TimeZone { get; set; }
 
+        DateTimeOffset CreateDateTimeThisYear(Month month, int date = 1, int hour = 0, int minute = 0, int second = 0, int millisecond = 0);
+
+        DateTimeOffset CreateDateTimeThisYear(int month, int date = 1, int hour = 0, int minute = 0, int second = 0, int millisecond = 0);
+
+        /// <summary>
+        ///     Creates the date time offset.
+        /// </summary>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="date">The date.</param>
+        /// <param name="hour">The hour.</param>
+        /// <param name="minute">The minute.</param>
+        /// <param name="second">The second.</param>
+        /// <param name="millisecond">The millisecond.</param>
+        /// <returns>DateTimeOffset.</returns>
+        DateTimeOffset CreateDateTimeOffset(int year, Month month, int date = 1, int hour = 0, int minute = 0, int second = 0, int millisecond = 0);
+
         /// <summary>
         ///     Creates the date time offset.
         /// </summary>

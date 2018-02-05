@@ -4,7 +4,7 @@
 // Created          : 01-27-2018
 //
 // Last Modified By : Brandon LeBlanc
-// Last Modified On : 01-27-2018
+// Last Modified On : 01-29-2018
 // ***********************************************************************
 // <copyright file="IYearlyRecurringEvent.cs" company="Brandon LeBlanc">
 //     Copyright © 2018 LeBlanc Codes, LLC
@@ -17,15 +17,53 @@ using System;
 namespace LeBlancCodes.Calendar.Interfaces
 {
     /// <summary>
-    ///     Interface IYearlyRecurringEvent
+    ///     Enum RecurringEventType
     /// </summary>
-    public interface IYearlyRecurringEvent : IRecurringEvent, IComparable<IYearlyRecurringEvent>
+    public enum RecurringEventType
     {
         /// <summary>
-        ///     Gets the date.
+        ///     The undefined
         /// </summary>
+        Undefined,
+
+        /// <summary>
+        ///     The fixed date based yearly recurring event
+        /// </summary>
+        FixedDateBasedYearlyRecurringEvent,
+
+        /// <summary>
+        ///     The month week based yearly recurring event
+        /// </summary>
+        MonthWeekBasedYearlyRecurringEvent,
+
+        /// <summary>
+        ///     The easter based yearly recurring event
+        /// </summary>
+        EasterBasedYearlyRecurringEvent,
+
+        /// <summary>
+        ///     The reference based yearly recurring event
+        /// </summary>
+        ReferenceBasedYearlyRecurringEvent
+    }
+
+    /// <summary>
+    ///     Interface IYearlyRecurringEvent
+    /// </summary>
+    public interface IYearlyRecurringEvent : IRecurringEvent
+    {
+        /// <summary>
+        ///     Gets the occurrence for the specified year.
+        /// </summary>
+        /// <param name="factory">The factory.</param>
         /// <param name="year">The year.</param>
         /// <returns>DateTimeOffset.</returns>
-        DateTimeOffset GetDate(int year);
+        DateTimeOffset GetOccurrenceForYear(IDateTimeFactory factory, int year);
+
+        /// <summary>
+        /// Gets the earliest occurrence month.
+        /// </summary>
+        /// <value>The earliest occurrence month.</value>
+        Month EarliestOccurrenceMonth { get; }
     }
 }

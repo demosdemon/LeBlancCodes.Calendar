@@ -23,12 +23,6 @@ namespace LeBlancCodes.Calendar.Interfaces
     public interface IYearlyRecurringEventCollection : ICollection<IYearlyRecurringEvent>
     {
         /// <summary>
-        ///     Gets or sets the time zone.
-        /// </summary>
-        /// <value>The time zone.</value>
-        TimeZoneInfo TimeZone { get; set; }
-
-        /// <summary>
         ///     Gets or sets the factory.
         /// </summary>
         /// <value>The factory.</value>

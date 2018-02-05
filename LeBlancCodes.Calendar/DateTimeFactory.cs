@@ -23,6 +23,29 @@ namespace LeBlancCodes.Calendar
     /// </summary>
     internal class DateTimeFactory : IDateTimeFactory
     {
+        internal static readonly IDateTimeFactory Instance = new DateTimeFactory();
+
+        public DateTimeOffset CreateDateTimeThisYear(Month month, int date = 1, int hour = 0, int minute = 0, int second = 0, int millisecond = 0) =>
+            CreateDateTimeOffset(DateTimeOffset.Now.Year, month, date, hour, minute, second, millisecond);
+
+        public DateTimeOffset CreateDateTimeThisYear(int month, int date = 1, int hour = 0, int minute = 0, int second = 0, int millisecond = 0) =>
+            CreateDateTimeOffset(DateTimeOffset.Now.Year, month, date, hour, minute, second, millisecond);
+
+        /// <summary>
+        ///     Creates the date time offset.
+        /// </summary>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="date">The date.</param>
+        /// <param name="hour">The hour.</param>
+        /// <param name="minute">The minute.</param>
+        /// <param name="second">The second.</param>
+        /// <param name="millisecond">The millisecond.</param>
+        /// <returns>DateTimeOffset.</returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public DateTimeOffset CreateDateTimeOffset(int year, Month month, int date = 1, int hour = 0, int minute = 0, int second = 0, int millisecond = 0) =>
+            CreateDateTimeOffset(year, (int) month, date, hour, minute, second, millisecond);
+
         /// <summary>
         ///     Creates the date time offset.
         /// </summary>
@@ -54,7 +77,7 @@ namespace LeBlancCodes.Calendar
         public TimeZoneInfo TimeZone { get; set; } = TimeZoneInfo.Local;
 
         /// <summary>
-        /// Sets the value.
+        ///     Sets the value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="minValue">The minimum value.</param>
@@ -75,7 +98,7 @@ namespace LeBlancCodes.Calendar
         }
 
         /// <summary>
-        /// Sets the value.
+        ///     Sets the value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="minValue">The minimum value.</param>

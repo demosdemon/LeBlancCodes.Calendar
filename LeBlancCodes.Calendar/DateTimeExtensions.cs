@@ -4,7 +4,7 @@
 // Created          : 01-27-2018
 //
 // Last Modified By : Brandon LeBlanc
-// Last Modified On : 01-28-2018
+// Last Modified On : 01-29-2018
 // ***********************************************************************
 // <copyright file="DateTimeExtensions.cs" company="Brandon LeBlanc">
 //     Copyright © 2018 LeBlanc Codes, LLC
@@ -13,31 +13,33 @@
 // ***********************************************************************
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 
 namespace LeBlancCodes.Calendar
 {
     /// <summary>
-    ///     Class DateTimeExtensions.
+    /// Class DateTimeExtensions.
     /// </summary>
     public static class DateTimeExtensions
     {
         /// <summary>
-        ///     Determines whether the specified <see cref="DateTimeOffset" /> is a weekday.
+        /// Determines whether the specified <see cref="DateTimeOffset" /> is a weekday.
         /// </summary>
         /// <param name="dto">The dto.</param>
         /// <returns><c>true</c> if the specified dto is weekday; otherwise, <c>false</c>.</returns>
         public static bool IsWeekday(this DateTimeOffset dto) => dto.DayOfWeek.IsWeekday();
 
         /// <summary>
-        ///     Determines whether the specified <see cref="DayOfWeek" /> is a weekday.
+        /// Determines whether the specified <see cref="DayOfWeek" /> is a weekday.
         /// </summary>
         /// <param name="dow">The dow.</param>
         /// <returns><c>true</c> if the specified dow is weekday; otherwise, <c>false</c>.</returns>
         public static bool IsWeekday(this DayOfWeek dow) => DayOfWeek.Sunday < dow && dow < DayOfWeek.Saturday;
 
         /// <summary>
-        ///     Sets the time zone.
+        /// Sets the time zone.
         /// </summary>
         /// <param name="dto">The dto.</param>
         /// <param name="timeZone">The time zone.</param>
@@ -50,7 +52,7 @@ namespace LeBlancCodes.Calendar
         }
 
         /// <summary>
-        ///     Sets the specified time.
+        /// Sets the specified time.
         /// </summary>
         /// <param name="dto">The dto.</param>
         /// <param name="time">The time.</param>
@@ -62,8 +64,8 @@ namespace LeBlancCodes.Calendar
         }
 
         /// <summary>
-        ///     Returns a new <see cref="DateTimeOffset" /> with the specified <paramref name="hour" />, <paramref name="minute" />
-        ///     , <paramref name="second" />, and <paramref name="millisecond" />. Defaults to midnight.
+        /// Returns a new <see cref="DateTimeOffset" /> with the specified <paramref name="hour" />, <paramref name="minute" />
+        /// , <paramref name="second" />, and <paramref name="millisecond" />. Defaults to midnight.
         /// </summary>
         /// <param name="dto">The dto.</param>
         /// <param name="hour">The hour.</param>
@@ -76,5 +78,22 @@ namespace LeBlancCodes.Calendar
             TimeSpan.FromSeconds(second) +
             TimeSpan.FromMinutes(minute) +
             TimeSpan.FromHours(hour));
+    }
+
+    /// <summary>
+    /// Class EnumerableExtensions.
+    /// </summary>
+    public static class EnumerableExtensions
+    {
+        /// <summary>
+        /// Ases the dictionary.
+        /// </summary>
+        /// <typeparam name="TKey">The type of the t key.</typeparam>
+        /// <typeparam name="TValue">The type of the t value.</typeparam>
+        /// <param name="source">The source.</param>
+        /// <param name="keyComparer">The key comparer.</param>
+        /// <returns>IDictionary&lt;TKey, TValue&gt;.</returns>
+        public static IDictionary<TKey, TValue> AsDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> source, IEqualityComparer<TKey> keyComparer = null) =>
+            source.ToDictionary(kvp => kvp.Key, kvp => kvp.Value, keyComparer);
     }
 }

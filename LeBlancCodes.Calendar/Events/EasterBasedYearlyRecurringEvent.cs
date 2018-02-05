@@ -4,7 +4,7 @@
 // Created          : 01-27-2018
 //
 // Last Modified By : Brandon LeBlanc
-// Last Modified On : 01-27-2018
+// Last Modified On : 01-29-2018
 // ***********************************************************************
 // <copyright file="EasterBasedYearlyRecurringEvent.cs" company="Brandon LeBlanc">
 //     Copyright © 2018 LeBlanc Codes, LLC
@@ -22,12 +22,32 @@ namespace LeBlancCodes.Calendar.Events
     /// </summary>
     public sealed class EasterBasedYearlyRecurringEvent : BaseYearlyRecurringEvent<EasterBasedYearlyRecurringEvent>
     {
+        private static DateTimeOffset EarliestEaster => DateTimeFactory.Instance.CreateDateTimeThisYear(Month.March, 22);
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="EasterBasedYearlyRecurringEvent" /> class.
         /// </summary>
-        /// <param name="factory">The factory.</param>
         /// <param name="offset">The offset.</param>
-        public EasterBasedYearlyRecurringEvent(IDateTimeFactory factory, int offset) : base(factory) => Offset = offset;
+        public EasterBasedYearlyRecurringEvent(int offset) => Offset = offset;
+
+        /// <summary>
+        ///     Gets the earliest occurrence month.
+        /// </summary>
+        /// <value>The earliest occurrence month.</value>
+        public override Month EarliestOccurrenceMonth
+        {
+            get
+            {
+                var earliestOccurrence = EarliestEaster + TimeSpan.FromDays(Offset);
+                return (Month) earliestOccurrence.Month;
+            }
+        }
+
+        /// <summary>
+        ///     Gets the type of the recurring event.
+        /// </summary>
+        /// <value>The type of the recurring event.</value>
+        public override RecurringEventType RecurringEventType => RecurringEventType.EasterBasedYearlyRecurringEvent;
 
         /// <summary>
         ///     Gets the offset.
@@ -66,25 +86,14 @@ namespace LeBlancCodes.Calendar.Events
         /// <summary>
         ///     Gets the date value.
         /// </summary>
+        /// <param name="factory">The factory.</param>
         /// <param name="year">The year.</param>
         /// <returns>DateTimeOffset.</returns>
-        protected override DateTimeOffset GetDateValue(int year)
+        protected override DateTimeOffset GetDate(IDateTimeFactory factory, int year)
         {
             var (month, day) = GetEaster(year);
-            var easter = Factory.CreateDateTimeOffset(year, month, day);
+            var easter = factory.CreateDateTimeOffset(year, month, day);
             return easter.AddDays(Offset);
-        }
-
-        /// <summary>
-        ///     Called when [compare].
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <param name="compare">The compare.</param>
-        /// <returns>System.Int32.</returns>
-        protected override bool OnCompare(IYearlyRecurringEvent other, out int compare)
-        {
-            compare = Offset.CompareTo(((EasterBasedYearlyRecurringEvent) other).Offset);
-            return true;
         }
 
         /// <summary>
